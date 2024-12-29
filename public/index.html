@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMESTAMP MICROSERVICEt</title>
+</head>
+<body style="text-align: center; padding: 20px;">
+    <div>
+        <h1>Timestamp Microservice</h1>
+    </div>
+    <div>
+        <h2>Example Usages:</h2>
+        <a href="">[project url]/api/2015-12-25</br></br></a>
+        <a href="">[project url]/api/1451001600000</a>
+        <h2>Example Output:</h2>
+        <p id="example"></p>
+        <h3>By S.Rupesh</h3>
+    </div>
+    <script>
+        // Fetch data from the backend
+        fetch('/data')
+            .then(response => response.json())
+            .then(data => {
+                // Update the content of the example div
+                document.getElementById('example').textContent = 
+                    `"unix": ${data.unixTimestamp}, "utc": ${data.utcString}`;
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    </script>
+</body>
+</html>
