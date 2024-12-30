@@ -2,12 +2,12 @@ var express = require('express');
 var app = express();
 app.use(express.json());
 
-absolutePath = __dirname + '/public/index.html';
+const absolutePath = __dirname + '/public/index.html';
 app.get('/', function (req, res) {
   res.sendFile(absolutePath);
 });
 
-app.get('/api/:date', (req, res) => {
+app.get('/api/:date?', (req, res) => {
   const dateParam = req.params.date;
   let parsedDate = new Date(dateParam);
   console.log(parsedDate)
@@ -19,8 +19,8 @@ app.get('/api/:date', (req, res) => {
     }
   }
   res.json({
-    unix: parsedDate.getTime(),
-    utc: parsedDate.toUTCString()
+    "unix": Number(parsedDate.getTime()),
+    "utc": parsedDate.toUTCString()
   });
 });
 
