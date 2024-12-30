@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIMESTAMP MICROSERVICEt</title>
 </head>
-<body style="text-align: center; padding: 20px;">
+
+<body style="text-align: center; padding: 20px; background-color: grey; color: white;">
     <div>
         <h1>Timestamp Microservice</h1>
     </div>
     <div>
         <h2>Example Usages:</h2>
-        <a href="">[project url]/api/2015-12-25</br></br></a>
-        <a href="">[project url]/api/1451001600000</a>
+        <a id="dateh" href="">[project url]/api/2015-12-25</br></br></a>
+        <a id="unixh" href="">[project url]/api/1451001600000</a>
         <h2>Example Output:</h2>
         <p id="example"></p>
         <h3>By S.Rupesh</h3>
     </div>
     <script>
-        // Fetch data from the backend
-        fetch('/data')
+        // getting url from client side
+        window.addEventListener('load', function () {
+            const currentUrl = window.location.href;
+            document.getElementById('dateh').href = currentUrl + "api/2015-12-25"
+            document.getElementById('unixh').href = currentUrl + "api/1451001600000"
+        });
+
+        fetch('http://localhost:3000/data')
             .then(response => response.json())
             .then(data => {
-                // Update the content of the example div
-                document.getElementById('example').textContent = 
-                    `"unix": ${data.unixTimestamp}, "utc": ${data.utcString}`;
-            })
-            .catch(err => {
-                console.error('Error fetching data:', err);
+                document.getElementById("example").textContent = `{"unix" : ${data.unix}, "utc" : "${data.utc}"}`;
             });
     </script>
 </body>
+
 </html>
